@@ -3,7 +3,6 @@ import Layout from '../components/layout'
 import { StaticImage } from 'gatsby-plugin-image'
 
 const HomePage = () => {
-
   return (
     <Layout pageHeading="Home Page" pageTitle="Home">
       <StaticImage src="https://images.unsplash.com/photo-1604070974113-2aa6f24c0df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80" alt="how are you really?"/>
