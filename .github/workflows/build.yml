@@ -1,0 +1,33 @@
+# .github/workflows/build.yml
+
+on:
+  - push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v2
+
+      # Simple NPM variant
+      - name: NPM install
+        run: 'npm install'
+      - name: Build app
+        run: 'npm run build'
+
+      # Yarn variant with caching
+      - name: Yarn cache directory
+        id: yarn-cache-dir
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Yarn cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Yarn install
+        run: 'yarn install --pure-lockfile'
+      - name: Build app
+        run: 'yarn run build'
